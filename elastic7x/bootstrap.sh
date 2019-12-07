@@ -22,7 +22,7 @@ PROVISION_FOLDER="/vagrant"
 # Update & Upgrade System
 echo "[$(DATE)] [Info] [System] Updating & Upgrading System..."
 apt update &> /dev/null
-apt -y upgrade &> /dev/null
+DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade &> /dev/null
 
 # Install Java
 if [ $(dpkg-query -W -f='${Status}' openjdk-8-jdk 2>/dev/null | grep -c "ok installed") -eq 0 ];
